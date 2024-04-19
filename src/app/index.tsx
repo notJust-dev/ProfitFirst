@@ -1,24 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import { Link } from 'expo-router';
+import { Redirect } from 'expo-router';
+import { View, Text } from 'react-native';
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <Text>Allocations</Text>
+const HomeScreen = () => {
+  return <Redirect href={'/allocations'} />;
+};
 
-      <Link href="/accounts">Go to accounts</Link>
-      
-      <StatusBar style="auto" />
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default HomeScreen;
