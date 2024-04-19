@@ -1,6 +1,5 @@
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import AccountsList from '../components/AccountsList';
-import { Entypo } from '@expo/vector-icons';
 import { useState } from 'react';
 
 export default function AccountsScreen() {
