@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import AccountsList from '../components/AccountsList';
 import { useState } from 'react';
+import database, { accountsCollection } from '../db';
 
 export default function AccountsScreen() {
   const [name, setName] = useState('');
@@ -9,6 +10,19 @@ export default function AccountsScreen() {
 
   const createAccount = () => {
     console.warn('Create account: ', name);
+  };
+
+  const onRead = async () => {
+    const accounts = await accountsCollection.query().fetch();
+    console.log(accounts);
+
+    await database.write(async () => {
+      await accountsCollection.create((account) => {
+        account.name = 'Test';
+        account.cap = 10.5;
+        account.tap = 20.1;
+      });
+    });
   };
 
   return (
@@ -43,6 +57,8 @@ export default function AccountsScreen() {
       </View>
 
       <Button title="Add account" onPress={createAccount} />
+
+      <Button title="Test" onPress={onRead} />
     </View>
   );
 }
