@@ -16,6 +16,7 @@ export default class Allocation extends Model {
 
   @field('income') income: number;
   @readonly @date('created_at') createdAt: Date;
+  @readonly @date('updated_at') updatedAt: Date;
   @nochange @field('user_id') userId: string;
 
   @children('account_allocations') accountAllocations;
