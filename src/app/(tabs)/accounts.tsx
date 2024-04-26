@@ -2,11 +2,14 @@ import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
 import AccountsList from '../../components/AccountsList';
 import { useState } from 'react';
 import database, { accountsCollection } from '../../db';
+import { useAuth } from '../../providers/AuthProvider';
 
 export default function AccountsScreen() {
   const [name, setName] = useState('');
   const [cap, setCap] = useState('');
   const [tap, setTap] = useState('');
+
+  const { user } = useAuth();
 
   const createAccount = async () => {
     await database.write(async () => {
@@ -14,6 +17,7 @@ export default function AccountsScreen() {
         account.name = name;
         account.cap = Number.parseFloat(cap);
         account.tap = Number.parseFloat(tap);
+        account.userId = user?.id;
       });
     });
     setName('');
