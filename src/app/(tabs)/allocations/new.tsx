@@ -5,9 +5,9 @@ import database, {
   accountAllocationCollection,
   accountsCollection,
   allocationsCollection,
-} from '../../db';
+} from '../../../db';
 import { withObservables } from '@nozbe/watermelondb/react';
-import Account from '../../model/Account';
+import Account from '../../../model/Account';
 
 function NewAllocationScreen({ accounts }: { accounts: Account[] }) {
   const [income, setIncome] = useState('0');

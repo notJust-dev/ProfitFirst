@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Button, TextInput } from 'react-native';
-import AccountsList from '../components/AccountsList';
+import AccountsList from '../../components/AccountsList';
 import { useState } from 'react';
-import database, { accountsCollection } from '../db';
+import database, { accountsCollection } from '../../db';
 
 export default function AccountsScreen() {
   const [name, setName] = useState('');
