@@ -1,7 +1,18 @@
 import { View, Text, StyleSheet } from 'react-native';
 import Allocation from '../model/Allocation';
+import { withObservables } from '@nozbe/watermelondb/react';
+import AccountAllocation from '../model/AccountAllocation';
+import AccountAllocationItem from './AccountAllocationItem';
 
-const AllocationListItem = ({ allocation }: { allocation: Allocation }) => {
+type AllocationListItem = {
+  allocation: Allocation;
+  accountAllocations: AccountAllocation[];
+};
+
+const AllocationListItem = ({
+  allocation,
+  accountAllocations,
+}: AllocationListItem) => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -10,9 +21,25 @@ const AllocationListItem = ({ allocation }: { allocation: Allocation }) => {
         </Text>
         <Text style={styles.income}>${allocation.income}</Text>
       </View>
+
+      <View style={{ gap: 5, paddingVertical: 5 }}>
+        {accountAllocations.map((item) => (
+          <AccountAllocationItem accountAllocation={item} />
+        ))}
+      </View>
     </View>
   );
 };
+
+const enhance = withObservables(
+  ['allocation'],
+  ({ allocation }: { allocation: Allocation }) => ({
+    allocation,
+    accountAllocations: allocation.accountAllocations,
+  })
+);
+
+export default enhance(AllocationListItem);
 
 const styles = StyleSheet.create({
   container: {
@@ -31,5 +58,3 @@ const styles = StyleSheet.create({
     color: 'green',
   },
 });
-
-export default AllocationListItem;
