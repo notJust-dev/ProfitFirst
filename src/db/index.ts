@@ -7,6 +7,9 @@ import migrations from './migrations';
 import Account from '../model/Account';
 import Allocation from '../model/Allocation';
 import AccountAllocation from '../model/AccountAllocation';
+import * as Crypto from 'expo-crypto';
+import { setGenerator } from '@nozbe/watermelondb/utils/common/randomId';
+setGenerator(() => Crypto.randomUUID());
 
 // First, create the adapter to the underlying database:
 const adapter = new SQLiteAdapter({

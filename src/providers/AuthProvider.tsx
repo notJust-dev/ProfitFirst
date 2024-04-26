@@ -36,14 +36,12 @@ export default function AuthProvider({ children }: PropsWithChildren) {
     });
   }, []);
 
-  console.log(session.user);
-
   return (
     <AuthContext.Provider
       value={{
         session,
         user: session?.user,
-        isAuthenticated: !!session?.user && !session.user.is_anonymous,
+        isAuthenticated: !!session?.user && !session?.user.is_anonymous,
       }}
     >
       {children}
